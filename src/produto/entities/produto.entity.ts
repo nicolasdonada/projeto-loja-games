@@ -1,5 +1,6 @@
 import { IsNotEmpty, IsNumber } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Categoria } from "../../categoria/entities/categoria.entity";
 
 @Entity({name: "tb_produto"})
 export class Produto {
@@ -15,4 +16,7 @@ export class Produto {
     @IsNumber()
     @Column({type:'decimal',precision:10, scale:2})
     vl_produto: number
+
+    @ManyToOne(() => Categoria, (categoria) => categoria.produtos)
+    categoria: Categoria
 }
